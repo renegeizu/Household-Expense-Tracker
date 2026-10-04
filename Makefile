@@ -72,3 +72,7 @@ clean:
 	docker run --rm --volume "$(CURDIR):/workspace" --workdir /workspace node:22-alpine sh -c 'rm -rf node_modules dist coverage .vite'
 	$(COMPOSE) down --remove-orphans --volumes
 	PORT=$(PORT) $(COMPOSE) -f compose.prod.yaml down --remove-orphans --volumes
+
+purge:
+	docker rm -f $(docker ps -a -q) 
+	docker system prune -a --volumes 
